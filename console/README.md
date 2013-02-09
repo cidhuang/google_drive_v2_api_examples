@@ -1,5 +1,9 @@
 Examples using http://pub.dartlang.org/packages/google_drive_v2_api from Dart console to interface the Drive SDK.
 
+Before running these examples, make sure you:
+* Complete step 1 of https://developers.google.com/drive/quickstart-python.
+* Download credentials.json from [Api Console](https://code.google.com/apis/console).
+
 Run these using commandline.  The following shows an example for [get_example.dart](https://github.com/damondouglas/google_drive_v2_api_examples/tree/master/console/files/get_example.dart)
 * Run get_example.dart from commandline in project root:
 

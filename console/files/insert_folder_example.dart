@@ -1,5 +1,6 @@
-//Courtesy:  https://github.com/dart-gde/dart_api_client_examples
-
+// Courtesy:  https://github.com/dart-gde/dart_api_client_examples
+// Run as 
+// dart console/files/insert_folder_example.dart
 
 import "dart:io";
 import "dart:async";
@@ -34,14 +35,31 @@ void createPublicFolder(folderName, drivelib.Drive drive) {
       });
 }
 
-void main() {
+void run(Map client_secrets) {
+  String identifier = client_secrets["client_id"];
+  String secret = client_secrets["client_secret"];
   //showAll();
-  String identifier = "814252216960.apps.googleusercontent.com";
-  String secret = "JSzWxJYl7IGMCjrMX1UqL50b";
+  
   List scopes = [drivelib.Drive.DRIVE_FILE_SCOPE, drivelib.Drive.DRIVE_SCOPE];
-  print(scopes);
+  
   final auth = new OAuth2Console(identifier: identifier, secret: secret, scopes: scopes);
   var drive = new drivelib.Drive(auth);
   drive.makeAuthRequests = true;
   createPublicFolder("public_folder", drive);
+}
+
+void main() {
+  
+  String path = "client_secrets.json";
+  File secrets = new File(path);
+  secrets.exists().then((bool exists){
+    if(exists) {
+      secrets.readAsString().then((String content){
+        Map client_secret_installed = JSON.parse(content);
+        Map client_secrets = client_secret_installed["installed"];
+          run(client_secrets);
+        });
+      }
+    });
+    
 }

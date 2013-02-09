@@ -11,7 +11,7 @@ import "package:http/http.dart" as http;
 
 void listFiles(String query, drivelib.Drive drive, Function callback) {
   
-  drive.files.list(maxResults:10).then((drivelib.FileList fileList){
+  drive.files.list(maxResults:10,q:query).then((drivelib.FileList fileList){
     Function.apply(callback,[fileList]);
   });
   

@@ -1,0 +1,9 @@
+name: google_drive_v2_api_examples
+author: Damon Douglas
+description: Examples using http://pub.dartlang.org/packages/google_drive_v2_api from Dart console to interface the Drive SDK.
+dependencies:
+  google_drive_v2_api: any
+
+#dependencies:
+#  js: any
+#  unittest: any

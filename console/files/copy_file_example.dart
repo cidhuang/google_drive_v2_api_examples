@@ -1,5 +1,5 @@
 // Run as 
-// dart console/files/get_example.dart
+// dart console/files/copy_file_example.dart
 
 import "dart:io";
 import "dart:async";
@@ -9,15 +9,17 @@ import "package:google_drive_v2_api/drive_v2_api_console.dart" as drivelib;
 import "package:http/http.dart" as http;
 
 
-void getFile(String fileId, drivelib.Drive drive, Function callback) {
+void copyFile(String fileId, drivelib.Drive drive, Function callback) {
+  
   var request = drive.files.get(fileId).then((drivelib.File rtrvdFile) {
-    Function.apply(callback,[rtrvdFile]);
-    
+    drive.files.copy(rtrvdFile, fileId).then((drivelib.File copiedFile){
+      Function.apply(callback,[copiedFile]);  
+    });
   });
   
 }
 
-void onGetFile(drivelib.File file) {
+void onCopyFile(drivelib.File file) {
   print(file);
 }
 
@@ -31,7 +33,7 @@ void run(Map client_secrets) {
   var drive = new drivelib.Drive(auth);
   drive.makeAuthRequests = true;
   
-  getFile("1z13pdHxgJAxZfTcA3zTuegwE5SYpfH3VWaQLAOl-Rc4", drive, onGetFile);
+  copyFile("1z13pdHxgJAxZfTcA3zTuegwE5SYpfH3VWaQLAOl-Rc4", drive, onCopyFile);
 }
 
 void main() {
